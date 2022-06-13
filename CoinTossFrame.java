@@ -120,7 +120,7 @@ public class CoinTossFrame {
 				tossButton.setVisible(false);
 				quitButton.setVisible(false);
 				resultLabel.setIcon(null);
-				if (bet = false) {
+				if (bet == false) {
 					resultLabel.setText("<html><center>Thanks for tossing! You flipped a total</br> of " + noOfFlips + " time(s). You flipped heads " + headsCount + " time(s) and tails " + tailsCount + " time(s).</center></html>");
 				}
 				else if (choice.equals("heads") && headsCount > noOfFlips/2) {
