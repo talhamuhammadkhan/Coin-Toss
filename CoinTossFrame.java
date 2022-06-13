@@ -16,6 +16,10 @@ public class CoinTossFrame {
 	private JFrame frame;
 	private JLabel messageLabel;
 	private JLabel resultLabel;
+	private JButton betButton;
+	private JButton nobetButton;
+	private JButton headsButton;
+	private JButton tailsButton;
 	private JButton quitButton;
 	private JButton tossButton;
 	private JButton pennyButton;
@@ -27,6 +31,9 @@ public class CoinTossFrame {
 	int tailsCount = 0;   //total number of tails flipped
 	String headsImage;
 	String tailsImage;
+	Boolean bet = false;
+	String choice;
+	
 	
 
 	/**
@@ -62,7 +69,7 @@ public class CoinTossFrame {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
-		messageLabel = new JLabel("Welcome! Choose your coin.");
+		messageLabel = new JLabel("Welcome! Do you want to bet?");
 		messageLabel.setVerticalAlignment(SwingConstants.TOP);
 		messageLabel.setFont(new Font("Yu Gothic UI Light", Font.PLAIN, 16));
 		messageLabel.setForeground(Color.BLACK);
@@ -123,6 +130,7 @@ public class CoinTossFrame {
 		
 		pennyButton = new JButton("PENNY");
 		pennyButton.setFont(new Font("Stencil", Font.PLAIN, 15));
+		pennyButton.setVisible(false);
 		pennyButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				headsImage = ("C:\\\\Users\\\\user\\\\Documents\\\\Ferris Summer 2022\\\\penny heads.jpg");
@@ -139,6 +147,7 @@ public class CoinTossFrame {
 		
 		dimeButton = new JButton("DIME");
 		dimeButton.setFont(new Font("Stencil", Font.PLAIN, 15));
+		dimeButton.setVisible(false);
 		dimeButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				headsImage = ("C:\\\\Users\\\\user\\\\Documents\\\\Ferris Summer 2022\\\\dime heads.jpg");
@@ -155,6 +164,7 @@ public class CoinTossFrame {
 		
 		quarterButton = new JButton("QUARTER");
 		quarterButton.setFont(new Font("Stencil", Font.PLAIN, 15));
+		quarterButton.setVisible(false);
 		quarterButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				headsImage = ("C:\\\\Users\\\\user\\\\Documents\\\\Ferris Summer 2022\\\\quarter heads.jpg");
@@ -168,6 +178,71 @@ public class CoinTossFrame {
 		});
 		quarterButton.setBounds(160, 182, 109, 30);
 		frame.getContentPane().add(quarterButton);
+		
+		betButton = new JButton("BET");
+		betButton.setFont(new Font("Stencil", Font.PLAIN, 15));
+		betButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				bet = true;
+				messageLabel.setText("Heads or Tails?");
+				betButton.setVisible(false);
+				nobetButton.setVisible(false);
+				headsButton.setVisible(true);
+				tailsButton.setVisible(true);
+			}
+		});
+		betButton.setBounds(80, 126, 89, 30);
+		frame.getContentPane().add(betButton);
+		
+		nobetButton = new JButton("NAH");
+		nobetButton.setFont(new Font("Stencil", Font.PLAIN, 15));
+		nobetButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				bet = false;
+				messageLabel.setText("Choose your coin.");
+				betButton.setVisible(false);
+				nobetButton.setVisible(false);
+				pennyButton.setVisible(true);
+				dimeButton.setVisible(true);
+				quarterButton.setVisible(true);
+			}
+		});	
+		nobetButton.setBounds(259, 126, 89, 30);
+		frame.getContentPane().add(nobetButton);
+		
+		headsButton = new JButton("HEADS");
+		headsButton.setFont(new Font("Stencil", Font.PLAIN, 15));
+		headsButton.setVisible(false);
+		headsButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				choice = "heads";
+				messageLabel.setText("Choose your coin.");
+				headsButton.setVisible(false);
+				tailsButton.setVisible(false);
+				pennyButton.setVisible(true);
+				dimeButton.setVisible(true);
+				quarterButton.setVisible(true);
+			}
+		});
+		headsButton.setBounds(80, 126, 89, 30);
+		frame.getContentPane().add(headsButton);
+		
+		tailsButton = new JButton("TAILS");
+		tailsButton.setFont(new Font("Stencil", Font.PLAIN, 15));
+		tailsButton.setVisible(false);
+		tailsButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				choice = "tails";
+				messageLabel.setText("Choose your coin.");
+				headsButton.setVisible(false);
+				tailsButton.setVisible(false);
+				pennyButton.setVisible(true);
+				dimeButton.setVisible(true);
+				quarterButton.setVisible(true);
+			}
+		});
+		tailsButton.setBounds(259, 126, 89, 30);
+		frame.getContentPane().add(tailsButton);
 		
 	}
 }
