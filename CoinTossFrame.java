@@ -31,7 +31,7 @@ public class CoinTossFrame {
 	int tailsCount = 0;   //total number of tails flipped
 	String headsImage;
 	String tailsImage;
-	Boolean bet = false;
+	Boolean bet;
 	String choice;
 	
 	
@@ -120,7 +120,21 @@ public class CoinTossFrame {
 				tossButton.setVisible(false);
 				quitButton.setVisible(false);
 				resultLabel.setIcon(null);
-				resultLabel.setText("<html><center>Thanks for tossing! You flipped a total</br> of " + noOfFlips + " time(s). You flipped heads " + headsCount + " time(s) and tails " + tailsCount + " time(s).</center></html>");
+				if (bet = false) {
+					resultLabel.setText("<html><center>Thanks for tossing! You flipped a total</br> of " + noOfFlips + " time(s). You flipped heads " + headsCount + " time(s) and tails " + tailsCount + " time(s).</center></html>");
+				}
+				else if (choice.equals("heads") && headsCount > noOfFlips/2) {
+					resultLabel.setText("<html><center>Congratulations! You have won the bet with " + headsCount + " correct predictions out of " + noOfFlips + ".</center></html>");	
+				}
+				else if (choice.equals("tails") && tailsCount > noOfFlips/2) {
+					resultLabel.setText("<html><center>Congratulations! You have won the bet with " + tailsCount + " correct predictions out of " + noOfFlips + ".</center></html>");
+				}
+				else if (headsCount == noOfFlips/2 && tailsCount == noOfFlips/2) {
+					resultLabel.setText("It's a draw.");
+				}
+				else {
+					resultLabel.setText("YOU HAVE LOST THE BET.");
+				}
 				resultLabel.setFont(new Font("Yu Gothic UI Light", Font.BOLD, 20));
 				resultLabel.setForeground(Color.BLACK);
 			}
