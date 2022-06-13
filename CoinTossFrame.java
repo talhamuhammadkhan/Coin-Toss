@@ -8,21 +8,26 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.ImageIcon;
-import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 
 public class CoinTossFrame {
 
 	private JFrame frame;
-	private static JLabel messageLabel;
-	private static JLabel resultLabel;
-	private static JButton quitButton;
-	private static JButton tossButton;
+	private JLabel messageLabel;
+	private JLabel resultLabel;
+	private JButton quitButton;
+	private JButton tossButton;
+	private JButton pennyButton;
+	private JButton dimeButton;
+	private JButton quarterButton;
 	
 	int noOfFlips = 0;    //total number of flips
 	int headsCount = 0;   //total number of heads flipped
 	int tailsCount = 0;   //total number of tails flipped
+	String headsImage;
+	String tailsImage;
+	
 
 	/**
 	 * Launch the application.
@@ -57,7 +62,7 @@ public class CoinTossFrame {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
-		messageLabel = new JLabel("Welcome! Let's toss some coins!");
+		messageLabel = new JLabel("Welcome! Choose your coin.");
 		messageLabel.setVerticalAlignment(SwingConstants.TOP);
 		messageLabel.setFont(new Font("Yu Gothic UI Light", Font.PLAIN, 16));
 		messageLabel.setForeground(Color.BLACK);
@@ -65,9 +70,39 @@ public class CoinTossFrame {
 		frame.getContentPane().add(messageLabel);
 		
 		resultLabel = new JLabel("");
+		resultLabel.setVisible(false);
 		resultLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		resultLabel.setBounds(80, 11, 268, 239);
 		frame.getContentPane().add(resultLabel);
+		
+		tossButton = new JButton("TOSS");
+		tossButton.setVisible(false);
+		tossButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				resultLabel.setVisible(true);
+				Flip flip = new Flip();
+				flip.setResult();
+				++noOfFlips;
+				
+				if (flip.getResult() == "Heads") {
+					messageLabel.setText("You flipped heads! You can toss again or quit.");
+					resultLabel.setIcon(new ImageIcon(headsImage));
+					++headsCount;
+				}
+				else {
+					messageLabel.setText("You flipped tails! You can toss again or quit.");
+					resultLabel.setIcon(new ImageIcon(tailsImage));
+					++tailsCount;
+				}
+				
+				quitButton.setVisible(true);
+			}
+		});
+		tossButton.setFont(new Font("Tempus Sans ITC", Font.BOLD, 19));
+		tossButton.setBackground(UIManager.getColor("Button.darkShadow"));
+		tossButton.setForeground(Color.BLACK);
+		tossButton.setBounds(347, 11, 77, 30);
+		frame.getContentPane().add(tossButton);
 		
 		quitButton = new JButton("QUIT");
 		quitButton.setVisible(false);
@@ -86,32 +121,53 @@ public class CoinTossFrame {
 		quitButton.setBounds(347, 220, 77, 30);
 		frame.getContentPane().add(quitButton);
 		
-		tossButton = new JButton("TOSS");
-		tossButton.addActionListener(new ActionListener() {
+		pennyButton = new JButton("PENNY");
+		pennyButton.setFont(new Font("Stencil", Font.PLAIN, 15));
+		pennyButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Flip flip = new Flip();
-				flip.setResult();
-				++noOfFlips;
-				
-				if (flip.getResult() == "Heads") {
-					messageLabel.setText("You flipped heads! You can toss again or quit.");
-					resultLabel.setIcon(new ImageIcon("C:\\Users\\user\\Documents\\Ferris Summer 2022\\penny heads.jpg"));
-					++headsCount;
-				}
-				else {
-					messageLabel.setText("You flipped tails! You can toss again or quit.");
-					resultLabel.setIcon(new ImageIcon("C:\\Users\\user\\Documents\\Ferris Summer 2022\\penny tails.jpg"));
-					++tailsCount;
-				}
-				
-				quitButton.setVisible(true);
+				headsImage = ("C:\\\\Users\\\\user\\\\Documents\\\\Ferris Summer 2022\\\\penny heads.jpg");
+				tailsImage = ("C:\\\\Users\\\\user\\\\Documents\\\\Ferris Summer 2022\\\\penny tails.jpg");
+				pennyButton.setVisible(false);
+				dimeButton.setVisible(false);
+				quarterButton.setVisible(false);
+				messageLabel.setText("Let's toss!");
+				tossButton.setVisible(true);
+			}
+		});	
+		pennyButton.setBounds(160, 69, 109, 30);
+		frame.getContentPane().add(pennyButton);
+		
+		dimeButton = new JButton("DIME");
+		dimeButton.setFont(new Font("Stencil", Font.PLAIN, 15));
+		dimeButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				headsImage = ("C:\\\\Users\\\\user\\\\Documents\\\\Ferris Summer 2022\\\\dime heads.jpg");
+				tailsImage = ("C:\\\\Users\\\\user\\\\Documents\\\\Ferris Summer 2022\\\\dime tails.jpg");
+				pennyButton.setVisible(false);
+				dimeButton.setVisible(false);
+				quarterButton.setVisible(false);
+				messageLabel.setText("Let's toss!");
+				tossButton.setVisible(true);
 			}
 		});
-		tossButton.setFont(new Font("Tempus Sans ITC", Font.BOLD, 19));
-		tossButton.setBackground(UIManager.getColor("Button.darkShadow"));
-		tossButton.setForeground(Color.BLACK);
-		tossButton.setBounds(347, 11, 77, 30);
-		frame.getContentPane().add(tossButton);
+		dimeButton.setBounds(160, 126, 109, 30);
+		frame.getContentPane().add(dimeButton);
+		
+		quarterButton = new JButton("QUARTER");
+		quarterButton.setFont(new Font("Stencil", Font.PLAIN, 15));
+		quarterButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				headsImage = ("C:\\\\Users\\\\user\\\\Documents\\\\Ferris Summer 2022\\\\quarter heads.jpg");
+				tailsImage = ("C:\\\\Users\\\\user\\\\Documents\\\\Ferris Summer 2022\\\\quarter tails.jpg");
+				pennyButton.setVisible(false);
+				dimeButton.setVisible(false);
+				quarterButton.setVisible(false);
+				messageLabel.setText("Let's toss!");
+				tossButton.setVisible(true);
+			}
+		});
+		quarterButton.setBounds(160, 182, 109, 30);
+		frame.getContentPane().add(quarterButton);
 		
 	}
 }
