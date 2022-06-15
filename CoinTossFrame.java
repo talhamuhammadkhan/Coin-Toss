@@ -6,13 +6,17 @@ import java.awt.Color;
 import java.awt.Font;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.io.FileInputStream;
+import java.util.Scanner;
 import java.awt.event.ActionEvent;
 import javax.swing.ImageIcon;
 import javax.swing.SwingConstants;
 import javax.swing.UIManager;
+import javax.swing.JTextField;
+
 
 public class CoinTossFrame {
-
+	
 	private JFrame frame;
 	private JLabel messageLabel;
 	private JLabel resultLabel;
@@ -25,16 +29,17 @@ public class CoinTossFrame {
 	private JButton pennyButton;
 	private JButton dimeButton;
 	private JButton quarterButton;
+	private JTextField userText;
+	private JButton enterButton;
 	
 	int noOfFlips = 0;    //total number of flips
 	int headsCount = 0;   //total number of heads flipped
 	int tailsCount = 0;   //total number of tails flipped
+	String user;
 	String headsImage;
 	String tailsImage;
 	Boolean bet;
-	String choice;
-	
-	
+	String choice;	
 
 	/**
 	 * Launch the application.
@@ -69,11 +74,11 @@ public class CoinTossFrame {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
-		messageLabel = new JLabel("Welcome! Do you want to bet?");
+		messageLabel = new JLabel("Welcome! Please enter a username for this tossing session.");
 		messageLabel.setVerticalAlignment(SwingConstants.TOP);
 		messageLabel.setFont(new Font("Yu Gothic UI Light", Font.PLAIN, 16));
 		messageLabel.setForeground(Color.BLACK);
-		messageLabel.setBounds(10, 11, 338, 30);
+		messageLabel.setBounds(10, 11, 414, 30);
 		frame.getContentPane().add(messageLabel);
 		
 		resultLabel = new JLabel("");
@@ -195,6 +200,7 @@ public class CoinTossFrame {
 		
 		betButton = new JButton("BET");
 		betButton.setFont(new Font("Stencil", Font.PLAIN, 15));
+		betButton.setVisible(false);
 		betButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				bet = true;
@@ -210,6 +216,7 @@ public class CoinTossFrame {
 		
 		nobetButton = new JButton("NAH");
 		nobetButton.setFont(new Font("Stencil", Font.PLAIN, 15));
+		nobetButton.setVisible(false);
 		nobetButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				bet = false;
@@ -257,6 +264,27 @@ public class CoinTossFrame {
 		});
 		tailsButton.setBounds(259, 126, 89, 30);
 		frame.getContentPane().add(tailsButton);
+		
+		userText = new JTextField();
+		userText.setBounds(132, 130, 169, 20);
+		frame.getContentPane().add(userText);
+		userText.setColumns(10);
+		
+		enterButton = new JButton("ENTER");
+		enterButton.setFont(new Font("Stencil", Font.PLAIN, 15));
+		enterButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				user = userText.getText();
+				userText.setVisible(false);
+				enterButton.setVisible(false);
+				betButton.setVisible(true);
+				nobetButton.setVisible(true);
+				messageLabel.setText("Welcome " + user + "! Would you like to bet? ");
+			}
+		});
+		enterButton.setBounds(335, 220, 89, 30);
+		frame.getContentPane().add(enterButton);
+		
 		
 	}
 }
